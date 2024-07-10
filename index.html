@@ -9,10 +9,27 @@
     <meta property="og:image" content="https://telegra.ph/file/8182efdb2415a8e717d9e.jpg" />
     <meta property="og:url" content="https://shin-tracker.vercel.app" />
     <style>
-        .custom-text {
-        color: blue; /* Warna teks menjadi biru */
-        font-size: 40px; /* Ukuran teks */
-        font-family: 'Arial', sans-serif; /* Jenis font */
+             .container1 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;                 
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }        
+        .image {
+            width: 100px;
+            height: 100px;
+            margin-right: 20px;
+        }
+        
+        .title {
+            font-size: 32px;
+            color: #666;
+            font-family: Georgia, serif;
+            text-align: center;
         }
         .container {
             display: flex;
@@ -48,7 +65,10 @@
     </style>
 </head>
 <body>
-    <p class="custom-text">Shin Image Tracker</h1>
+    <div class="container">
+        <img src="https://telegra.ph/file/32fc804a4917abd24284f.jpg" alt="Logo Shin Image Tracker" class="image">
+        <h1 class="title">Shin Image Tracker</h1>
+    </div>
     <div id="video-container">       
     <canvas id="canvas" style="display: none;"></canvas>     
         <br>
