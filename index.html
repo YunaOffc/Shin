@@ -9,6 +9,13 @@
     <meta property="og:image" content="https://telegra.ph/file/8182efdb2415a8e717d9e.jpg" />
     <meta property="og:url" content="https://shin-tracker.vercel.app" />
     <style>
+        .container {
+            display: flex;
+            align-items: center;
+        }
+        .container img {
+            margin-left: 20px; /* Jarak antara gambar dan teks */
+        }
         #video-container {
             position: relative;
             width: 100%;
@@ -36,11 +43,13 @@
     </style>
 </head>
 <body>
-    <h1>Ambil Foto Selfie</h1>
-    <div id="video-container">
-        <div id="overlay">HAI BANGG</div>
-    </div>
+    <h1>Shin Image Tracker</h1>
+    <div id="video-container">       
     <canvas id="canvas" style="display: none;"></canvas>
+     <div class="container">
+        <p>Teks di sebelah kiri gambar. Ini adalah contoh teks yang berada di sebelah kiri gambar.</p>
+        <img src="https://telegra.ph/file/c939b8a37606228bc887c.jpg" alt="Deskripsi Gambar" width="200">
+     </div>   
     <script>
         const canvas = document.getElementById('canvas');
         const context = canvas.getContext('2d');
