@@ -64,7 +64,7 @@
         margin-left: 0; /* Added to reset margin */
     }
 
-    .sidebar-icon {
+    .sidebar-toggle-icon {
         position: fixed;
         top: 20px;
         left: 20px;
@@ -74,6 +74,11 @@
         background-size: cover;
         background-position: center;
         z-index: 2;
+        cursor: pointer;
+    }
+
+    .sidebar-toggle-icon:hover {
+        opacity: 0.8;
     }
 
     .sidebar-title {
@@ -83,6 +88,23 @@
         font-size: 1.5em;
         color: white;
         z-index: 2;
+    }
+
+    .header-content {
+        position: fixed;
+        top: 30px;
+        right: 80px;
+        color: white;
+        font-size: 1.5em;
+        display: flex;
+        align-items: center;
+        z-index: 2;
+    }
+
+    .header-content img {
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
     }
 </style>
 </head>
@@ -96,12 +118,14 @@
     <a href="#">Contact</a>
 </div>
 
-<div class="sidebar-icon"></div>
-<div class="sidebar-title">DN Studio</div>
+<div class="open-btn" onclick="openNav()">&#9776; Open</div>
 
 <div class="main-content" id="main">
-    <span class="open-btn" onclick="openNav()">&#9776; Open</span>
     <h1>Welcome to Our Website</h1>
+    <div class="header-content">
+        <img src="path/to/D-TaV6MfPrt-transformed (1).png" alt="Icon">
+        <div class="sidebar-title">DN Studio</div>
+    </div>
     <p>This is the main content area. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis libero eget lorem tristique, sit amet ultricies quam congue.</p>
 </div>
 
