@@ -1,147 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contoh Sidebar Toggle HTML</title>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        overflow-x: hidden; /* Menghilangkan horizontal scroll */
-    }
-
-    .sidebar {
-        height: 100%;
-        width: 0;
-        position: fixed;
-        top: 0;
-        left: 0;
-        background-color: #111;
-        overflow-x: hidden;
-        transition: 0.5s;
-        padding-top: 60px;
-        z-index: 1;
-    }
-
-    .sidebar a {
-        padding: 10px 15px;
-        text-decoration: none;
-        font-size: 1.2em;
-        color: white;
-        display: block;
-        transition: 0.3s;
-    }
-
-    .sidebar a:hover {
-        color: #f1f1f1;
-    }
-
-    .sidebar .close-btn {
-        position: absolute;
-        top: 10px;
-        right: 25px;
-        font-size: 36px;
-        margin-left: 50px;
-    }
-
-    .open-btn {
-        font-size: 30px;
-        cursor: pointer;
-        position: fixed;
-        z-index: 2;
-        margin-left: 20px;
-        margin-top: 20px;
-    }
-
-    .open-btn:hover {
-        color: #f1f1f1;
-    }
-
-    .main-content {
-        transition: margin-left 0.5s;
-        padding: 20px;
-        margin-left: 0; /* Added to reset margin */
-    }
-
-    .sidebar-toggle-icon {
-        position: fixed;
-        top: 20px;
-        left: 20px;
-        width: 40px;
-        height: 40px;
-        background-image: url('path/to/D-TaV6MfPrt-transformed (1).png');
-        background-size: cover;
-        background-position: center;
-        z-index: 2;
-        cursor: pointer;
-    }
-
-    .sidebar-toggle-icon:hover {
-        opacity: 0.8;
-    }
-
-    .sidebar-title {
-        position: fixed;
-        top: 30px;
-        left: 80px;
-        font-size: 1.5em;
-        color: white;
-        z-index: 2;
-    }
-
-    .header-content {
-        position: fixed;
-        top: 30px;
-        right: 80px;
-        color: white;
-        font-size: 1.5em;
-        display: flex;
-        align-items: center;
-        z-index: 2;
-    }
-
-    .header-content img {
-        width: 40px;
-        height: 40px;
-        margin-right: 10px;
-    }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DN Studios</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .sidebar {
+            width: 200px;
+            background-color: #333;
+            color: white;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: -200px;
+            transition: left 0.3s;
+            padding: 15px;
+            box-sizing: border-box;
+            z-index: 1000;
+        }
+        .sidebar.show {
+            left: 0;
+        }
+        .menu-icon {
+            font-size: 24px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        .top-bar {
+            background-color: white;
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 999;
+        }
+        .top-bar h1 {
+            font-size: 1.5em;
+            margin: 0;
+            flex-grow: 1;
+        }
+        .content {
+            padding: 20px;
+            margin: 70px 20px 20px 20px; /* Space for the top bar */
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            font-size: 1.5em;
+            margin: 20px 0;
+        }
+        img {
+            width: 100%;
+            height: auto;
+        }
+        p {
+            font-size: 1.2em;
+            margin: 20px 0 0;
+        }
+        .sidebar div {
+            margin: 15px 0;
+        }
+    </style>
 </head>
 <body>
-
-<div class="sidebar" id="mySidebar">
-    <a href="javascript:void(0)" class="close-btn" onclick="closeNav()">&times;</a>
-    <a href="#">Home</a>
-    <a href="#">About</a>
-    <a href="#">Services</a>
-    <a href="#">Contact</a>
-</div>
-
-<div class="open-btn" onclick="openNav()">&#9776; </div>
-
-<div class="main-content" id="main">
-    <div class="sidebar-toggle-icon"></div>
-    <div class="sidebar-title">DN Studios</div>
-    <h1>DN Studio</h1>
-    <div class="header-content">            
-        <img src="D-TaV6MfPrt-transformed (1).png" alt="Icon">
+    <div class="sidebar" id="sidebar">
+        <div>Elemen</div>
+        <div>Teks</div>
+        <div>Merek</div>
+        <div>Unggahan</div>
+        <div>Gambar</div>
     </div>
-    <br><br><br><br>
-    <p>This is the main content area. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis libero eget lorem tristique, sit amet ultricies quam congue.</p>
-</div>
+    <div class="top-bar">
+        <div class="menu-icon" onclick="toggleSidebar()">&#9776;</div>
+        <h1>DN Studios</h1>
+    </div>
+    <div class="content">
+        <img src="https://via.placeholder.com/600x400.png?text=Image+Placeholder" alt="Mountains">
+        <h2>Apa itu DN Studios?</h2>
+        <p>DN adalah singkatan dari Dhyan yaitu pendiri dari DN Entertainment. Ia mendirikan perusahaan sejak 1990 tahun yang lalu.</p>
+    </div>
 
-<script>
-function openNav() {
-  document.getElementById("mySidebar").style.width = "250px";
-  document.getElementById("main").style.marginLeft = "250px";
-}
-
-function closeNav() {
-  document.getElementById("mySidebar").style.width = "0";
-  document.getElementById("main").style.marginLeft= "0";
-}
-</script>
-
+    <script>
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('show');
+        }
+    </script>
 </body>
 </html>
