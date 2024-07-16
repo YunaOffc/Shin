@@ -27,10 +27,14 @@
         .sidebar.show {
             left: 0;
         }
-        .menu-icon {
+        .menu-icon, .close-icon {
             font-size: 24px;
             cursor: pointer;
-            margin-right: 10px;
+        }
+        .close-icon {
+            position: absolute;
+            top: 15px;
+            right: 15px;
         }
         .top-bar {
             background-color: white;
@@ -48,10 +52,8 @@
             flex-grow: 1;
         }
         .content {
-            padding: 20px;
+            padding: 0 20px;
             margin: 70px 20px 20px 20px; /* Space for the top bar */
-            background-color: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         h2 {
             font-size: 1.5em;
@@ -72,6 +74,7 @@
 </head>
 <body>
     <div class="sidebar" id="sidebar">
+        <div class="close-icon" onclick="toggleSidebar()">&#10005;</div>
         <div>Elemen</div>
         <div>Teks</div>
         <div>Merek</div>
@@ -80,8 +83,10 @@
     </div>
     <div class="top-bar">
         <div class="menu-icon" onclick="toggleSidebar()">&#9776;</div>
+        <img src="D-TaV6MfPrt-transformed (1).png" alt="DN" width="50" height="50">
         <h1>DN Studios</h1>
     </div>
+    <br><br><br>
     <div class="content">
         <img src="https://via.placeholder.com/600x400.png?text=Image+Placeholder" alt="Mountains">
         <h2>Apa itu DN Studios?</h2>
