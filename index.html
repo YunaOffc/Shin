@@ -47,10 +47,15 @@
             width: 100%;
             z-index: 999;
         }
+        .top-bar .menu-icon, .top-bar h1 {
+            display: flex;
+            align-items: center;
+        }
         .top-bar h1 {
             font-size: 1.5em;
-            text-align: center;
             margin: 0;
+            flex-grow: 1;
+            text-align: center;
         }
         .top-bar img {
             width: 40px;
@@ -104,10 +109,8 @@
         <button onclick="location.href='login.html'">Sign In</button>
     </div>
     <div class="top-bar">
-        <div>
-            <div class="menu-icon" onclick="toggleSidebar()">&#9776;</div>
-            <h1>DN Studios</h1>
-        </div>
+        <div class="menu-icon" onclick="toggleSidebar()">&#9776;</div>
+        <h1>DN Studios</h1>
         <img src="https://via.placeholder.com/40" alt="Profile" onclick="location.href='profile.html'">
     </div>
     <div class="content">
