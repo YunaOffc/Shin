@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,6 +40,7 @@
             background-color: white;
             display: flex;
             align-items: center;
+            justify-content: space-between;
             padding: 15px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             position: fixed;
@@ -49,11 +50,17 @@
         .top-bar h1 {
             font-size: 1.5em;
             margin: 0;
-            flex-grow: 1;
+        }
+        .top-bar img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
         }
         .content {
-            padding: 0 20px;
-            margin: 70px 20px 20px 20px; /* Space for the top bar */
+            padding: 20px;
+            margin-top: 70px; /* Space for the top bar */
+            text-align: right;
         }
         h2 {
             font-size: 1.5em;
@@ -68,24 +75,40 @@
             margin: 20px 0 0;
         }
         .sidebar div {
-            margin: 15px 0;
+            margin: 10px 0;
+        }
+        .sidebar .title {
+            margin-bottom: 20px;
+        }
+        .sidebar button {
+            margin-top: 20px;
+            padding: 10px;
+            width: 100%;
+            background-color: #fff;
+            color: #333;
+            border: none;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
     <div class="sidebar" id="sidebar">
         <div class="close-icon" onclick="toggleSidebar()">&#10005;</div>
+        <div class="title">Features</div>
         <div>Elemen</div>
         <div>Teks</div>
         <div>Merek</div>
         <div>Unggahan</div>
         <div>Gambar</div>
+        <button onclick="location.href='login.html'">Sign In</button>
     </div>
     <div class="top-bar">
-        <div class="menu-icon" onclick="toggleSidebar()">&#9776;</div>
-                 <h1>DN Studios</h1>
+        <div>
+            <div class="menu-icon" onclick="toggleSidebar()">&#9776;</div>
+            <h1>DN Studios</h1>
+        </div>
+        <img src="https://via.placeholder.com/40" alt="Profile" onclick="location.href='profile.html'">
     </div>
-    <br><br><br>
     <div class="content">
         <img src="https://via.placeholder.com/600x400.png?text=Image+Placeholder" alt="Mountains">
         <h2>Apa itu DN Studios?</h2>
