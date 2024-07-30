@@ -3,126 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DN Studios</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-        .sidebar {
-            width: 200px;
-            background-color: #333;
-            color: white;
-            height: 100vh;
-            position: fixed;
-            top: 0;
-            left: -200px;
-            transition: left 0.3s;
-            padding: 15px;
-            box-sizing: border-box;
-            z-index: 1000;
-        }
-        .sidebar.show {
-            left: 0;
-        }
-        .menu-icon, .close-icon {
-            font-size: 24px;
-            cursor: pointer;
-        }
-        .close-icon {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-        }
-        .top-bar {
-            background-color: white;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 15px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            position: fixed;
-            width: 100%;
-            z-index: 999;
-        }
-        .top-bar .menu-icon, .top-bar h1 {
-            display: flex;
-            align-items: center;
-        }
-        .top-bar h1 {
-            font-size: 1.5em;
-            margin: 0;
-            flex-grow: 1;
-            text-align: center;
-        }
-        .top-bar img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-        }
-        .content {
-            padding: 20px;
-            margin-top: 70px; /* Space for the top bar */
-            text-align: right;
-        }
-        h2 {
-            font-size: 1.5em;
-            margin: 20px 0;
-        }
-        img {
-            width: 100%;
-            height: auto;
-        }
-        p {
-            font-size: 1.2em;
-            margin: 20px 0 0;
-        }
-        .sidebar div {
-            margin: 10px 0;
-        }
-        .sidebar .title {
-            margin-bottom: 20px;
-        }
-        .sidebar button {
-            margin-top: 20px;
-            padding: 10px;
-            width: 100%;
-            background-color: #fff;
-            color: #333;
-            border: none;
-            cursor: pointer;
-        }
-    </style>
+    <title>DANA Integration</title>
+  <style>
+      body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+    background-color: #007bff;
+    padding: 20px;
+    text-align: center;
+}
+
+.header img {
+    max-height: 50px;
+}
+
+.input-section {
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.input-section label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.phone-input {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.phone-input .country-code {
+    background-color: #eee;
+    padding: 10px;
+}
+
+.phone-input input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    outline: none;
+}
+
+.info-section {
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.info-section img {
+    display: block;
+    max-width: 50px;
+    margin-bottom: 10px;
+}
+
+.info-section p {
+    margin: 10px 0;
+}
+
+.note-section {
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+footer {
+    padding: 20px;
+    text-align: center;
+    background-color: #007bff;
+    color: #fff;
+}
+
+footer .protection {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+footer .protection img {
+    max-height: 30px;
+    margin-right: 10px;
+}
+
+footer .continue-btn {
+    background-color: #0056b3;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+footer .continue-btn:hover {
+    background-color: #004494;
+}
+
+  </style>
 </head>
 <body>
-    <div class="sidebar" id="sidebar">
-        <div class="close-icon" onclick="toggleSidebar()">&#10005;</div>
-        <div class="title">Features</div>
-        <div>Elemen</div>
-        <div>Teks</div>
-        <div>Merek</div>
-        <div>Unggahan</div>
-        <div>Gambar</div>
-        <button onclick="location.href='login.html'">Sign In</button>
+    <div class="container">
+        <header class="header">
+            <img src="logo.png" alt="DANA Logo">
+        </header>
+        <main>
+            <div class="input-section">
+                <label for="phone">Masukkan nomor HP sebagai ID DANA</label>
+                <div class="phone-input">
+                    <span class="country-code">+62</span>
+                    <input type="text" id="phone" placeholder="811 234 5678">
+                </div>
+            </div>
+            <div class="info-section">
+                <div class="google-dana">
+                    <img src="google-dana.png" alt="Google DANA">
+                </div>
+                <p>Dengan menghubungkan akun <strong>DANA</strong> ke <strong>Google</strong>, kamu mengizinkan untuk:</p>
+                <ul>
+                    <li>Bayar menggunakan Saldo DANA Anda secara otomatis</li>
+                </ul>
+                <p>Keamanan informasimu dijamin DANA. Dengan melanjutkan proses ini, kamu menyetujui <a href="#">Syarat & Ketentuan</a>.</p>
+            </div>
+            <div class="note-section">
+                <p>Pastikan untuk tetap di halaman ini sampai proses penghubungan akun berhasil.</p>
+            </div>
+        </main>
+        <footer>
+            <div class="protection">
+                <img src="protection.png" alt="DANA Protection">
+                <p>Your transaction is protected, fast and secure.</p>
+            </div>
+            <button class="continue-btn">LANJUTKAN</button>
+        </footer>
     </div>
-    <div class="top-bar">
-        <div class="menu-icon" onclick="toggleSidebar()">&#9776;</div>
-        <h1>DN Studios</h1>
-        <img src="https://via.placeholder.com/40" alt="Profile" onclick="location.href='profile.html'">
-    </div>
-    <div class="content">
-        <img src="https://via.placeholder.com/600x400.png?text=Image+Placeholder" alt="Mountains">
-        <h2>Apa itu DN Studios?</h2>
-        <p>DN adalah singkatan dari Dhyan yaitu pendiri dari DN Entertainment. Ia mendirikan perusahaan sejak 1990 tahun yang lalu.</p>
-    </div>
-
-    <script>
-        function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('show');
-        }
-    </script>
 </body>
 </html>
