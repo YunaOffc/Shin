@@ -1,155 +1,67 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DANA Integration</title>
-  <style>
-      body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-}
-
-.container {
-    max-width: 600px;
-    margin: 0 auto;
-    background-color: #fff;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.header {
-    background-color: #007bff;
-    padding: 20px;
-    text-align: center;
-}
-
-.header img {
-    max-height: 50px;
-}
-
-.input-section {
-    padding: 20px;
-    border-bottom: 1px solid #ddd;
-}
-
-.input-section label {
-    display: block;
-    margin-bottom: 10px;
-    font-weight: bold;
-}
-
-.phone-input {
-    display: flex;
-    align-items: center;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    overflow: hidden;
-}
-
-.phone-input .country-code {
-    background-color: #eee;
-    padding: 10px;
-}
-
-.phone-input input {
-    flex: 1;
-    padding: 10px;
-    border: none;
-    outline: none;
-}
-
-.info-section {
-    padding: 20px;
-    border-bottom: 1px solid #ddd;
-}
-
-.info-section img {
-    display: block;
-    max-width: 50px;
-    margin-bottom: 10px;
-}
-
-.info-section p {
-    margin: 10px 0;
-}
-
-.note-section {
-    padding: 20px;
-    background-color: #f9f9f9;
-}
-
-footer {
-    padding: 20px;
-    text-align: center;
-    background-color: #007bff;
-    color: #fff;
-}
-
-footer .protection {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-}
-
-footer .protection img {
-    max-height: 30px;
-    margin-right: 10px;
-}
-
-footer .continue-btn {
-    background-color: #0056b3;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-footer .continue-btn:hover {
-    background-color: #004494;
-}
-
-  </style>
+    <title>Comment Section</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .comment-box {
+            width: 100%;
+            margin: 20px 0;
+        }
+        .comment-list {
+            list-style: none;
+            padding: 0;
+        }
+        .comment-item {
+            background: #f4f4f4;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <header class="header">
-            <img src="https://telegra.ph/file/cfc57d659e710d0722ed6.jpg" alt="DANA Logo">
-        </header>
-        <main>
-            <div class="input-section">
-                <label for="phone">Masukkan nomor HP sebagai ID DANA</label>
-                <div class="phone-input">
-                    <span class="country-code">+62</span>
-                    <input type="text" id="phone" placeholder="811 234 5678">
-                </div>
-            </div>
-            <div class="info-section">
-                <div class="google-dana">
-                    <img src="https://telegra.ph/file/0dbb41965d0935b086c90.jpg" alt="Google DANA">
-                </div>
-                <p>Dengan menghubungkan akun <strong>DANA</strong> ke <strong>Google</strong>, kamu mengizinkan untuk:</p>
-                <ul>
-                    <li>Bayar menggunakan Saldo DANA Anda secara otomatis</li>
-                </ul>
-                <p>Keamanan informasimu dijamin DANA. Dengan melanjutkan proses ini, kamu menyetujui <a href="#">Syarat & Ketentuan</a>.</p>
-            </div>
-            <div class="note-section">
-                <p>Pastikan untuk tetap di halaman ini sampai proses penghubungan akun berhasil.</p>
-            </div>
-        </main>
-        <footer>
-            <div class="protection">
-                <img src="https://telegra.ph/file/4091217dcd3b9074213bf.jpg" alt="DANA Protection">
-                <p>Your transaction is protected, fast and secure.</p>
-            </div>
-            <button class="continue-btn">LANJUTKAN</button>
-        </footer>
+    <h1>Comment Section</h1>
+    <div class="comment-box">
+        <textarea id="comment" rows="4" cols="50" placeholder="Enter your comment"></textarea><br>
+        <button onclick="postComment()">Submit</button>
     </div>
+    <ul id="comments" class="comment-list"></ul>
+
+    <script>
+        async function fetchComments() {
+            const response = await fetch('https://comments.vercel.app/');
+            const comments = await response.json();
+            const commentList = document.getElementById('comments');
+            commentList.innerHTML = '';
+            comments.forEach(comment => {
+                const li = document.createElement('li');
+                li.className = 'comment-item';
+                li.textContent = comment.text;
+                commentList.appendChild(li);
+            });
+        }
+
+        async function postComment() {
+            const commentText = document.getElementById('comment').value;
+            const response = await fetch('https://comments.vercel.app/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ text: commentText })
+            });
+            if (response.ok) {
+                document.getElementById('comment').value = '';
+                fetchComments();
+            }
+        }
+
+        fetchComments();
+    </script>
 </body>
 </html>
