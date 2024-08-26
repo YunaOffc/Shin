@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+</head>
+<body>
+    <h2>Selamat datang, <%= user.phone %>!</h2>
+    <p>Saldo Anda: Rp<%= user.balance %></p>
+
+    <h3>Transfer Saldo</h3>
+    <form action="/transfer" method="POST">
+        <input type="text" name="phone" placeholder="Nomor Telepon Penerima" required>
+        <input type="number" name="amount" placeholder="Jumlah" required>
+        <button type="submit">Transfer</button>
+    </form>
+</body>
+</html>
