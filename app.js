@@ -7,7 +7,7 @@ const cookieParser = require('cookie-parser');
 const app = express();
 
 // Koneksi ke MongoDB
-mongoose.connect(process.env.MONGO_URI);
+//mongoose.connect(process.env.MONGO_URI);
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
