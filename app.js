@@ -5,9 +5,10 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
 const app = express();
+const MONGO_URI = "mongodb+srv://studiosdn6:EN9peFymlFsqIzgQ@cluster0.bfzkt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 
 // Koneksi ke MongoDB
-mongoose.connect(process.env.MONGO_URI, {
+mongoose.connect(MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
