@@ -28,13 +28,29 @@
       return null;
     }
 
+    // Fungsi untuk menghapus cookie
+    function deleteCookie(name) {
+      document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/`;
+    }
+
     // Mengecek apakah user sudah login
     const username = getCookie('username');
     const contentDiv = document.getElementById('content');
 
     if (username) {
       // Jika sudah login
-      contentDiv.innerHTML = `<h1>Udah login</h1><p>Selamat datang, ${username}!</p>`;
+      contentDiv.innerHTML = `
+        <h1>Udah login</h1>
+        <p>Selamat datang, ${username}!</p>
+        <button id="logoutButton">Logout</button>
+      `;
+
+      // Menangani aksi logout
+      const logoutButton = document.getElementById('logoutButton');
+      logoutButton.addEventListener('click', () => {
+        deleteCookie('username'); // Menghapus cookie
+        location.reload(); // Refresh halaman untuk menampilkan form login
+      });
     } else {
       // Jika belum login
       contentDiv.innerHTML = `
