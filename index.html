@@ -3,22 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login dengan Cookie</title>
+  <title>Website Registrasi</title>
 </head>
 <body>
-  <div id="content">
-    <!-- Konten akan diperbarui melalui JavaScript -->
+  <div id="app">
+    <!-- Konten akan diupdate oleh JavaScript -->
   </div>
 
   <script>
-    // Fungsi untuk menyimpan cookie
+    const jsonbinUrl = "https://api.jsonbin.io/v3/b/64acb63f9d312622e98f7b0b"; // Ganti dengan bin ID Anda
+    const jsonbinToken = "$2a$10$E06vBI4fi8z7ZxWP3952fewaFRCgasxoSgn5N.gLzyIIqbQ4GuR3O";
+
+    // Fungsi utilitas
+    async function fetchData() {
+      const response = await fetch(jsonbinUrl, {
+        headers: {
+          "X-Master-Key": jsonbinToken
+        }
+      });
+      const data = await response.json();
+      return data.record;
+    }
+
+    async function saveData(data) {
+      await fetch(jsonbinUrl, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Master-Key": jsonbinToken
+        },
+        body: JSON.stringify(data)
+      });
+    }
+
     function setCookie(name, value, days) {
       const date = new Date();
       date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
       document.cookie = `${name}=${value}; expires=${date.toUTCString()}; path=/`;
     }
 
-    // Fungsi untuk membaca cookie
     function getCookie(name) {
       const cookies = document.cookie.split('; ');
       for (let cookie of cookies) {
@@ -28,48 +51,95 @@
       return null;
     }
 
-    // Fungsi untuk menghapus cookie
     function deleteCookie(name) {
       document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/`;
     }
 
-    // Mengecek apakah user sudah login
-    const username = getCookie('username');
-    const contentDiv = document.getElementById('content');
+    // Fungsi utama
+    async function renderApp() {
+      const appDiv = document.getElementById("app");
+      const phoneNumber = getCookie("phoneNumber");
 
-    if (username) {
-      // Jika sudah login
-      contentDiv.innerHTML = `
-        <h1>Udah login</h1>
-        <p>Selamat datang, ${username}!</p>
-        <button id="logoutButton">Logout</button>
-      `;
+      if (phoneNumber) {
+        // Jika sudah login
+        const data = await fetchData();
+        const user = data.users.find(user => user.phoneNumber === phoneNumber);
+        if (user) {
+          appDiv.innerHTML = `
+            <h1>Selamat datang, ${user.name}!</h1>
+            <button id="logoutButton">Logout</button>
+          `;
+          document.getElementById("logoutButton").addEventListener("click", () => {
+            deleteCookie("phoneNumber");
+            renderApp();
+          });
+        } else {
+          deleteCookie("phoneNumber");
+          renderApp();
+        }
+      } else {
+        // Jika belum login
+        appDiv.innerHTML = `
+          <h1>Registrasi / Login</h1>
+          <form id="registerForm">
+            <label>Nama: <input type="text" id="name" required></label><br>
+            <label>Nomor WhatsApp: <input type="text" id="phoneNumber" required></label><br>
+            <button type="submit">Daftar</button>
+          </form>
+          <div id="verificationDiv" style="display: none;">
+            <label>Kode Verifikasi: <input type="text" id="verificationCode" required></label>
+            <button id="verifyButton">Verifikasi</button>
+          </div>
+        `;
 
-      // Menangani aksi logout
-      const logoutButton = document.getElementById('logoutButton');
-      logoutButton.addEventListener('click', () => {
-        deleteCookie('username'); // Menghapus cookie
-        location.reload(); // Refresh halaman untuk menampilkan form login
-      });
-    } else {
-      // Jika belum login
-      contentDiv.innerHTML = `
-        <h1>Masukkan Username</h1>
-        <form id="loginForm">
-          <label>Username: <input type="text" id="username" required></label>
-          <button type="submit">Login</button>
-        </form>
-      `;
+        document.getElementById("registerForm").addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const name = document.getElementById("name").value;
+          const phoneNumber = document.getElementById("phoneNumber").value;
+          const code = Math.floor(100000 + Math.random() * 900000);
 
-      // Menangani form login
-      const loginForm = document.getElementById('loginForm');
-      loginForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const usernameInput = document.getElementById('username').value;
-        setCookie('username', usernameInput, 7); // Simpan cookie selama 7 hari
-        location.reload(); // Refresh halaman untuk menampilkan status login
-      });
+          // Simpan kode verifikasi sementara di cookie
+          setCookie("tempCode", code, 0.1); // Berlaku 6 menit
+          setCookie("tempPhoneNumber", phoneNumber, 0.1);
+
+          // Kirim kode verifikasi via API bot
+          try {
+            await fetch('https://your-bot-server.com/send-verification', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ phoneNumber, code })
+            });
+            alert('Kode verifikasi dikirim ke WhatsApp Anda!');
+            document.getElementById("verificationDiv").style.display = "block";
+          } catch {
+            alert('Gagal mengirim kode verifikasi!');
+          }
+        });
+
+        document.getElementById("verifyButton").addEventListener("click", async () => {
+          const inputCode = document.getElementById("verificationCode").value;
+          const tempCode = getCookie("tempCode");
+          const tempPhoneNumber = getCookie("tempPhoneNumber");
+
+          if (inputCode === tempCode) {
+            // Simpan user ke database
+            const data = await fetchData();
+            data.users.push({ name: document.getElementById("name").value, phoneNumber: tempPhoneNumber });
+            await saveData(data);
+
+            // Set login cookie
+            setCookie("phoneNumber", tempPhoneNumber, 7);
+            deleteCookie("tempCode");
+            deleteCookie("tempPhoneNumber");
+            renderApp();
+          } else {
+            alert('Kode verifikasi salah!');
+          }
+        });
+      }
     }
+
+    renderApp();
   </script>
 </body>
 </html>
