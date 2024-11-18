@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login dengan Cookie</title>
+</head>
+<body>
+  <div id="content">
+    <!-- Konten akan diperbarui melalui JavaScript -->
+  </div>
+
+  <script>
+    // Fungsi untuk menyimpan cookie
+    function setCookie(name, value, days) {
+      const date = new Date();
+      date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+      document.cookie = `${name}=${value}; expires=${date.toUTCString()}; path=/`;
+    }
+
+    // Fungsi untuk membaca cookie
+    function getCookie(name) {
+      const cookies = document.cookie.split('; ');
+      for (let cookie of cookies) {
+        const [key, value] = cookie.split('=');
+        if (key === name) return value;
+      }
+      return null;
+    }
+
+    // Mengecek apakah user sudah login
+    const username = getCookie('username');
+    const contentDiv = document.getElementById('content');
+
+    if (username) {
+      // Jika sudah login
+      contentDiv.innerHTML = `<h1>Udah login</h1><p>Selamat datang, ${username}!</p>`;
+    } else {
+      // Jika belum login
+      contentDiv.innerHTML = `
+        <h1>Masukkan Username</h1>
+        <form id="loginForm">
+          <label>Username: <input type="text" id="username" required></label>
+          <button type="submit">Login</button>
+        </form>
+      `;
+
+      // Menangani form login
+      const loginForm = document.getElementById('loginForm');
+      loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const usernameInput = document.getElementById('username').value;
+        setCookie('username', usernameInput, 7); // Simpan cookie selama 7 hari
+        location.reload(); // Refresh halaman untuk menampilkan status login
+      });
+    }
+  </script>
+</body>
+</html>
