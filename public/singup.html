@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="in">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sing Up | Dann Pay</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #374A59;
+            margin: 0;
+            padding: 0;
+            color: white;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 20px ;
+            padding: 20px;
+            background-color: #2C3E50;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+         label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        input[type="text"], input[type="date"], .input-wa input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .input-wa {
+            display: flex;
+            align-items: center;
+        }
+
+        .input-wa span {
+            padding: 10px;
+            padding-bottom: 10px;
+            background-color: #ccc;
+            border: 1px solid #ccc;
+            border-radius: 5px 0 0 5px;
+            flex-shrink: 0;
+        }
+
+        .input-wa input {
+            border-radius: 0 5px 5px 0;            
+        }
+
+        .checkbox {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .checkbox input {
+            margin-right: 10px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #1E90FF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+         .btn1 {
+            width: 100%;
+            padding: 12px;
+            background-color: #;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        a {
+            color: yellow;
+        }
+
+        .btn:disabled {
+            background-color: #6CA0DC;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .overlay.active {
+            display: flex;
+        }
+
+        .overlay-content {
+            background: #2C3E50;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 80%;
+            max-width: 400px;
+        }
+
+        .input-code {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .input-code input {
+            width: 18%;
+            padding: 10px;
+            text-align: center;
+            font-size: 18px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .retry {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .retry span {
+            color: red;
+            cursor: pointer;
+        }
+        #error-message {
+    display: none; /* Default tidak terlihat */
+    background-color: #FF6B6B;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 14px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+.mus {
+    text-align: center;
+}
+    </style>
+</head>
+<body>
+    <div id="mus">
+        <br>
+        <h1>           
+        <span style="font-size: 34px;">Hi, Welcome</span> <br>
+        <span style="font-size: 34px;">to</span>      
+        <span style="color: yellow; font-size: 34px;">D</span><span style="color: white; font-size: 34px">ann Pay</span>
+        </h1>
+    </div> 
+    <br><br><br>   
+    <div class="container">
+                <div id="error-message">Nomor WhatsApp tidak valid!</div>
+        <h1>Login</h1>
+        <form id="login-form">
+            <label for="name">Nama</label>
+            <input type="text" id="name" placeholder="Nama">
+
+            <label for="whatsapp">Nomor WhatsApp</label>
+            <div class="input-wa">
+                <span>+62</span>
+                <input type="number" id="whatsapp" placeholder="856xxxxxxx">
+            </div>
+
+            <label for="birthdate">Tanggal Lahir</label>
+            <input type="date" id="birthdate">
+
+            <div class="checkbox">
+                <input type="checkbox" id="terms">
+                <label for="terms">Saya telah membaca dan menyetujui S&K.</label>
+            </div>
+
+            <button type="button" class="btn" id="login-btn" disabled>Login</button>
+            <p>Have an account? <a href="login.html"> Login</a></p>
+        </form>
+    </div>
+
+    <div class="overlay" id="overlay">
+        <div class="overlay-content">
+            <h2>Masukkan Kode Verifikasi</h2>
+            <div class="input-code">
+                <input type="number" maxlength="1" class="code-input">
+                <input type="number" maxlength="1" class="code-input">
+                <input type="number" maxlength="1" class="code-input">
+                <input type="number" maxlength="1" class="code-input">
+            </div>
+            <button class="btn" id="verify-btn">Verifikasi</button>
+            <button class="btn1" id="retry-btn" style="margin-top: 10px;">Batal</button>
+        </div>
+    </div>
+
+    <script>
+        let kode = Math.floor(1000 + Math.random() * 9000);
+        const loginBtn = document.getElementById("login-btn");
+         const whatsappInput = document.getElementById("whatsapp");
+        const termsCheckbox = document.getElementById("terms");
+        const overlay = document.getElementById("overlay");
+        const codeInputs = document.querySelectorAll(".code-input");
+        const verifyBtn = document.getElementById("verify-btn");
+        const retryBtn = document.getElementById("retry-btn");
+        const errorMessage = document.getElementById("error-message");
+
+        termsCheckbox.addEventListener("change", () => {
+            loginBtn.disabled = !termsCheckbox.checked;
+        });
+
+        loginBtn.addEventListener("click", async () => {        
+            const name = document.getElementById("name").value.trim();
+            const whatsapp = whatsappInput.value.trim();
+            const birthdate = document.getElementById("birthdate").value.trim();
+
+            if (!name || !whatsapp || !birthdate || !/^[0-9]{9,12}$/.test(whatsapp)) {
+                
+                errorMessage.style.display = "block";
+                return;
+            }
+
+            const data = {
+                status: "reg",
+                name,
+                nomer: `62${whatsapp}`, // Menambahkan +62 otomatis
+                kode: kode,
+                regTime: new Date().toLocaleDateString("id-ID"),
+                age: birthdate,
+            };
+
+            try {
+                const response = await fetch("https://api.jsonbin.io/v3/b/673b420ae41b4d34e4564c6d", {
+                    method: "PUT",
+                    headers: { 
+                        "Content-Type": "application/json",
+                        "X-Master-Key": "$2a$10$E06vBI4fi8z7ZxWP3952fewaFRCgasxoSgn5N.gLzyIIqbQ4GuR3O", // Ganti dengan API key Anda
+                    },
+                    body: JSON.stringify(data),
+                });
+
+                if (!response.ok) {
+                    throw new Error("Gagal mengirim data ke server.");
+                }
+
+                alert("Data berhasil dikirim!");
+                overlay.classList.add("active"); // Tampilkan overlay
+            } catch (error) {
+                alert(`Terjadi kesalahan: ${error.message}`);
+            }
+        });
+
+        codeInputs.forEach((input, index) => {
+            input.addEventListener("input", (e) => {
+                if (input.value.length === 1 && index < codeInputs.length - 1) {
+                    codeInputs[index + 1].focus();
+                }
+            });
+        });
+        whatsappInput.addEventListener("input", () => {
+            const value = whatsappInput.value.trim();
+            const isValid = /^[0-9]{9,12}$/.test(value); // Validasi: Hanya angka, panjang 9-12 digit
+
+            if (!isValid) {
+                errorMessage.style.display = "block";
+                whatsappInput.style.borderColor = "red";
+            } else {
+                errorMessage.style.display = "none";
+                whatsappInput.style.borderColor = "#ccc";
+            }
+        });
+        verifyBtn.addEventListener("click", () => {
+            const enteredCode = Array.from(codeInputs).map(input => input.value).join("");
+            
+
+            if (enteredCode === `${kode}`) {
+                window.location.href = "dash.html";
+            } else {
+                alert("Kode salah! Silakan coba lagi.");
+                codeInputs.forEach(input => (input.value = ""));
+                codeInputs[0].focus();
+            }
+        });
+
+        retryBtn.addEventListener("click", () => {
+            overlay.classList.remove("active");
+        });
+    </script>
+</body>
+  </html>
