@@ -25,23 +25,14 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 // Middleware untuk Auth
-//const app = express();
-
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*"); // Mengizinkan semua origin
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, PUT, DELETE, OPTIONS"
-  ); // Metode yang diizinkan
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "Content-Type, Authorization"
-  ); // Header yang diizinkan
-  if (req.method === "OPTIONS") {
-    return res.status(200).end(); // Mengatasi preflight request
+function checkAuth(req, res, next) {
+  const token = req.cookies.token;
+  if (!token) {
+    return res.redirect("/signup");
   }
   next();
-});
+}
+
 // Routes
 app.get("/", (req, res) => {
   res.redirect("/signup");
@@ -137,3 +128,4 @@ app.listen(PORT, () => {
 });
 
 module.exports = app;
+  
