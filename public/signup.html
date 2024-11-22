@@ -3,74 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sing Up | Dann Pay</title>
+    <title>Input Nomor WhatsApp</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #374A59;
+            color: white;
+            overflow-x: hidden;
             margin: 0;
             padding: 0;
-            color: white;
         }
 
         .container {
             max-width: 400px;
-            margin: 20px ;
+            margin: 20px;
             padding: 20px;
             background-color: #2C3E50;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
-
-        h1 {
+        .container h1 {
             text-align: center;
-            font-size: 24px;
-            margin-bottom: 20px;
+            color: #5DADE2;
         }
 
-         label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 14px;
-        }
-
-        input[type="text"], input[type="date"], .input-wa input {
-            width: calc(100% - 20px);
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .input-wa {
+        .input-container {
             display: flex;
+            position: relative;
             align-items: center;
+            justify-content: center;
         }
 
-        .input-wa span {
-            padding: 10px;
-            padding-bottom: 10px;
+        .input-container span {
             background-color: #ccc;
-            border: 1px solid #ccc;
+            padding: 11px;
             border-radius: 5px 0 0 5px;
-            flex-shrink: 0;
         }
 
-        .input-wa input {
-            border-radius: 0 5px 5px 0;            
+        .input-container input {
+            width: 80%;
+            padding: 10px;
+            margin-left: -1px; /* Menghilangkan gap antar input */
+            border: 1px solid #ccc;
+            border-radius: 0 5px 5px 0;
+            font-size: 16px;
         }
-
-        .checkbox {
+        .bang {
             display: flex;
-            align-items: center;
-            font-size: 14px;
-            margin-bottom: 20px;
         }
-
-        .checkbox input {
-            margin-right: 10px;
+        .bang input {
+            width: 93%;
+            padding: 10px;
+            margin-left: -1px; /* Menghilangkan gap antar input */
+            border: 1px solid #ccc;
+            border-radius: 0 5px 5px 0;
+            font-size: 16px;
         }
-
+        .bung {
+            
+        }
+        .bung input {
+            width: 93%;
+            padding: 10px;
+            margin-left: -1px; /* Menghilangkan gap antar input */
+            border: 1px solid #ccc;
+            border-radius: 0 5px 5px 0;
+            font-size: 16px;
+        }
         .btn {
             width: 100%;
             padding: 12px;
@@ -81,25 +80,49 @@
             font-size: 16px;
             cursor: pointer;
         }
-         .btn1 {
-            width: 100%;
-            padding: 12px;
-            background-color: #;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        a {
-            color: yellow;
-        }
 
         .btn:disabled {
             background-color: #6CA0DC;
+        }        
+    .error-message {
+    position: absolute; /* Posisi relatif ke container input */
+    background-color: #FF6B6B;
+    color: white;
+    padding: 10px;
+    top: 100%;
+    border-radius: 5px;
+    margin-top: 5px; /* Jarak dengan input */
+    font-size: 14px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    width: calc(100% - 20px); /* Menyesuaikan lebar input */
+    z-index: 10; /* Pastikan muncul di atas elemen lain */
+}
+
+.error-message::before {
+    content: '';
+    position: absolute;
+    top: -10px; /* Segitiga muncul di atas pesan */
+    left: 20px; /* Sesuaikan posisi segitiga */
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #FF6B6B;
+}
+        #mus {
+            text-align: center;
+        }
+        .checkbox {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            margin-bottom: 20px;
         }
 
-        .overlay {
+        .checkbox input {
+            margin-right: 10px;
+        }
+          .overlay {
             position: fixed;
             top: 0;
             left: 0;
@@ -139,17 +162,7 @@
             border: 1px solid #ccc;
             border-radius: 5px;
         }
-
-        .retry {
-            margin-top: 10px;
-            font-size: 14px;
-        }
-
-        .retry span {
-            color: red;
-            cursor: pointer;
-        }
-        #error-message {
+        .error1 {
     display: none; /* Default tidak terlihat */
     background-color: #FF6B6B;
     color: white;
@@ -160,13 +173,28 @@
     font-size: 14px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
-.mus {
-    text-align: center;
+.blue-text {
+  color: blue;
+  cursor: pointer;
 }
+
+.yellow-text {
+  color: yellow;
+  cursor: pointer;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  color: yellow;
+  font-size: 16px;
+  cursor: pointer;
+}
+
     </style>
 </head>
 <body>
-    <div id="mus">
+     <div id="mus">
         <br>
         <h1>           
         <span style="font-size: 34px;">Hi, Welcome</span> <br>
@@ -175,32 +203,35 @@
         </h1>
     </div> 
     <br><br><br>   
-    <div class="container">
-                <div id="error-message">Nomor WhatsApp tidak valid!</div>
-        <h1>Login</h1>
-        <form id="login-form">
-            <label for="name">Nama</label>
-            <input type="text" id="name" placeholder="Nama">
-
-            <label for="whatsapp">Nomor WhatsApp</label>
-            <div class="input-wa">
-                <span>+62</span>
-                <input type="number" id="whatsapp" placeholder="856xxxxxxx">
-            </div>
-
-            <label for="birthdate">Tanggal Lahir</label>
-            <input type="date" id="birthdate">
-
-            <div class="checkbox">
+    <div class="container">        
+        <h1>Sign Up</h1>
+        <br>
+        <div class="error1" id="error1" style="display: none;">Isi Semua bidang!!!</div>
+        <h3>Nomor WhatsApp:</h3>
+        <div class="input-container">
+            <span>+62</span>
+            <input type="number" id="whatsapp" placeholder="856xxxxxxx" maxlength="13">
+            
+            <div id="whatsapp-error" class="error-message" style="display: none;">Nomor tidak valid!</div>
+        </div>
+        <br>
+        <h3>Masukan Nama:</h3>
+        <div class="bang">
+         <input type="text" id="name" placeholder="Nama Anda">
+                 
+         </div>
+         <br>
+         <div class="bung">
+             <h3>Tanggal Lahir</h3>             
+            <input type="date" id="birthday">
+         </div>
+         <br>
+         <div class="checkbox">
                 <input type="checkbox" id="terms">
                 <label for="terms">Saya telah membaca dan menyetujui S&K.</label>
             </div>
-
-            <button type="button" class="btn" id="login-btn" disabled>Login</button>
-            <p>Have an account? <a href="login.html"> Login</a></p>
-        </form>
+        <button class="btn" id="submit-btn" disabled>Submit</button>       
     </div>
-
     <div class="overlay" id="overlay">
         <div class="overlay-content">
             <h2>Masukkan Kode Verifikasi</h2>
@@ -211,101 +242,182 @@
                 <input type="number" maxlength="1" class="code-input">
             </div>
             <button class="btn" id="verify-btn">Verifikasi</button>
-            <button class="btn1" id="retry-btn" style="margin-top: 10px;">Batal</button>
+            <p>Nomor salah? <span id="gantiNomer" class="blue-text">Ganti nomor</span></p>
+  <p id="mintaKodeText">Atau minta kode baru dalam <span id="countdown" class="yellow-text">1 menit</span></p>
+  <p id="expiredMessage" style="display:none;">Waktu habis!</p>
+  <span id="atauText" style="display:none;">Atau</span> <span id="kirimUlangKode" class="yellow-text" style="display:none;">Kirim ulang kode</span>
+</div>
         </div>
     </div>
 
     <script>
-        let kode = Math.floor(1000 + Math.random() * 9000);
-        const loginBtn = document.getElementById("login-btn");
-         const whatsappInput = document.getElementById("whatsapp");
-        const termsCheckbox = document.getElementById("terms");
-        const overlay = document.getElementById("overlay");
-        const codeInputs = document.querySelectorAll(".code-input");
-        const verifyBtn = document.getElementById("verify-btn");
-        const retryBtn = document.getElementById("retry-btn");
-        const errorMessage = document.getElementById("error-message");
+        const whatsappInput = document.getElementById("whatsapp");
+const submitBtn = document.getElementById("submit-btn");
+const error1 = document.getElementById("error1");
+const name = document.getElementById("name");
+const termsCheckbox = document.getElementById("terms");
+const birthday = document.getElementById("birthday");
+const overlay = document.getElementById("overlay");
+const codeInputs = document.querySelectorAll(".code-input");
+const verifyBtn = document.getElementById("verify-btn");
+const gantiNomerBtn = document.getElementById("gantiNomer");
+const countdownElement = document.getElementById("countdown");
+const mintaKodeText = document.getElementById("mintaKodeText");
+const expiredMessage = document.getElementById("expiredMessage");
+const kirimUlangKodeButton = document.getElementById("kirimUlangKode");
+const atauText = document.getElementById("atauText");
 
-        termsCheckbox.addEventListener("change", () => {
-            loginBtn.disabled = !termsCheckbox.checked;
+let countdownInterval;
+let timeLeft = 60;
+let userData = null;
+
+// Reset countdown
+function resetCountdown() {
+    clearInterval(countdownInterval);
+    timeLeft = 60;
+    countdownElement.textContent = `${timeLeft} detik`;
+    countdownElement.style.display = "inline";
+    mintaKodeText.style.display = "block";
+    expiredMessage.style.display = "none";
+    kirimUlangKodeButton.style.display = "none";
+    atauText.style.display = "none";
+}
+
+// Memulai countdown
+function startCountdown() {
+    countdownInterval = setInterval(() => {
+        if (timeLeft <= 0) {
+            clearInterval(countdownInterval);
+            countdownElement.style.display = "none";
+            mintaKodeText.style.display = "none";
+            expiredMessage.style.display = "block";
+            kirimUlangKodeButton.style.display = "block";
+            atauText.style.display = "block";
+        } else {
+            countdownElement.textContent = `${timeLeft} detik`;
+            timeLeft--;
+        }
+    }, 1000);
+}
+
+// Kirim data ke server
+async function sendDataToServer(data) {
+    try {
+        const response = await fetch("https://your-api-url.com/submit", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
         });
+        const result = await response.json();
+        console.log("Server Response:", result);
+    } catch (error) {
+        console.error("Error sending data to server:", error);
+    }
+}
 
-        loginBtn.addEventListener("click", async () => {        
-            const name = document.getElementById("name").value.trim();
-            const whatsapp = whatsappInput.value.trim();
-            const birthdate = document.getElementById("birthdate").value.trim();
+// Validasi nomor WhatsApp
+function validatePhoneNumber() {
+    const value = whatsappInput.value.trim();
+    const isValid = /^[0-9]{9,13}$/.test(value);
 
-            if (!name || !whatsapp || !birthdate || !/^[0-9]{9,12}$/.test(whatsapp)) {
-                
-                errorMessage.style.display = "block";
-                return;
-            }
+    const errorElement = document.getElementById("whatsapp-error");
+    if (isValid) {
+        errorElement.style.display = "none";
+    } else {
+        errorElement.style.display = "block";
+    }
+}
 
-            const data = {
-                status: "reg",
-                name,
-                nomer: `62${whatsapp}`, // Menambahkan +62 otomatis
-                kode: kode,
-                regTime: new Date().toLocaleDateString("id-ID"),
-                age: birthdate,
-            };
+// Event listener untuk validasi checkbox
+termsCheckbox.addEventListener("change", () => {
+    submitBtn.disabled = !termsCheckbox.checked;
+});
 
-            try {
-                const response = await fetch("https://api.jsonbin.io/v3/b/673b420ae41b4d34e4564c6d", {
-                    method: "PUT",
-                    headers: { 
-                        "Content-Type": "application/json",
-                        "X-Master-Key": "$2a$10$E06vBI4fi8z7ZxWP3952fewaFRCgasxoSgn5N.gLzyIIqbQ4GuR3O", // Ganti dengan API key Anda
-                    },
-                    body: JSON.stringify(data),
-                });
+// Event listener untuk input WhatsApp
+whatsappInput.addEventListener("input", function () {
+    let value = whatsappInput.value.trim();
 
-                if (!response.ok) {
-                    throw new Error("Gagal mengirim data ke server.");
-                }
+    if (value && !/^[0-9]/.test(value)) {
+        value = value.replace(/[^0-9]/g, '');
+    }
 
-                alert("Data berhasil dikirim!");
-                overlay.classList.add("active"); // Tampilkan overlay
-            } catch (error) {
-                alert(`Terjadi kesalahan: ${error.message}`);
-            }
-        });
+    if (value.length <= 12) {
+        whatsappInput.value = value;
+    }
 
-        codeInputs.forEach((input, index) => {
-            input.addEventListener("input", (e) => {
-                if (input.value.length === 1 && index < codeInputs.length - 1) {
-                    codeInputs[index + 1].focus();
-                }
-            });
-        });
-        whatsappInput.addEventListener("input", () => {
-            const value = whatsappInput.value.trim();
-            const isValid = /^[0-9]{9,12}$/.test(value); // Validasi: Hanya angka, panjang 9-12 digit
+    validatePhoneNumber();
+});
 
-            if (!isValid) {
-                errorMessage.style.display = "block";
-                whatsappInput.style.borderColor = "red";
-            } else {
-                errorMessage.style.display = "none";
-                whatsappInput.style.borderColor = "#ccc";
-            }
-        });
-        verifyBtn.addEventListener("click", () => {
-            const enteredCode = Array.from(codeInputs).map(input => input.value).join("");
-            
+// Event listener untuk tombol Submit
+submitBtn.addEventListener("click", () => {
+    const nameValue = name.value.trim();
+    const whatsappValue = whatsappInput.value.trim();
+    const birthdateValue = birthday.value.trim();
 
-            if (enteredCode === `${kode}`) {
-                window.location.href = "dash.html";
-            } else {
-                alert("Kode salah! Silakan coba lagi.");
-                codeInputs.forEach(input => (input.value = ""));
-                codeInputs[0].focus();
-            }
-        });
+    validatePhoneNumber();
 
-        retryBtn.addEventListener("click", () => {
-            overlay.classList.remove("active");
-        });
+    if (!nameValue || !whatsappValue || !birthdateValue || !/^[0-9]{9,13}$/.test(whatsappValue)) {
+        error1.style.display = "block";
+        return;
+    }
+
+    error1.style.display = "none";
+    overlay.classList.add("active");
+    resetCountdown();
+    startCountdown();
+
+    userData = {
+        name: nameValue,
+        whatsapp: `+62${whatsappValue}`,
+        birthday: birthdateValue,
+    };
+
+    sendDataToServer(userData);
+});
+
+// Event listener untuk tombol "Kirim Ulang Kode"
+kirimUlangKodeButton.addEventListener("click", () => {
+    if (userData) {
+        alert("Kode baru berhasil dikirim!");
+        resetCountdown();
+        startCountdown();
+        sendDataToServer(userData);
+    } else {
+        alert("Data tidak valid. Silakan ulangi proses pendaftaran.");
+    }
+});
+
+// Event listener untuk tombol "Ganti Nomor"
+gantiNomerBtn.addEventListener("click", () => {
+    overlay.classList.remove("active");
+    resetCountdown();
+});
+
+// Event listener untuk input kode verifikasi
+codeInputs.forEach((input, index) => {
+    input.addEventListener("input", (e) => {
+        if (input.value.length === 1 && index < codeInputs.length - 1) {
+            codeInputs[index + 1].focus();
+        }
+    });
+});
+
+// Validasi kode verifikasi
+verifyBtn.addEventListener("click", () => {
+    const enteredCode = Array.from(codeInputs).map(input => input.value).join("");
+    const kode = "1234";
+
+    if (enteredCode === kode) {
+        alert("Kode berhasil diverifikasi!");
+        window.location.href = "dash.html";
+    } else {
+        alert("Kode salah, silahkan coba lagi!");
+        codeInputs.forEach(input => (input.value = ""));
+        codeInputs[0].focus();
+    }
+});
     </script>
 </body>
-  </html>
+</html>
