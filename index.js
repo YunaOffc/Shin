@@ -13,7 +13,7 @@ const {
   cekVerif, 
   hapusVerif, 
   tambahVerif 
-} = require("./index"); // Pastikan file `index.js` berada di lokasi yang sama
+} = require("./function"); // Pastikan file `index.js` berada di lokasi yang sama
 
 // Inisialisasi Aplikasi
 const app = express();
