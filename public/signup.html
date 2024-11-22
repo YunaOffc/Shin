@@ -312,9 +312,9 @@ async function sendDataToServer(data) {
             body: JSON.stringify(data),
         });
         const result = await response.json();
-        console.log("Server Response:", result);
+        alert("Server Response:", result);
     } catch (error) {
-        console.error("Error sending data to server:", error);
+        alert("Error sending data to server:", error);
     }
 }
 
