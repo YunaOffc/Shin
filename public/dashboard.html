@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="in">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Judul Halaman</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Semua CSS lama tetap di sini */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #374A59; /* Background utama */
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header Style */
+        .header {
+            display: flex;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #7f7f7f; /* Transparan */
+            color: white;
+            padding: 10px 20px;
+            height: 40px;
+            border-bottom: 1px solid #ccc;
+        }
+        .header .profile-icon,
+        .header .mail-icon {
+            color: white;
+            font-size: 40px;
+        }
+        .header .title {
+            font-size: 20px;
+            text-align: center;
+            flex-grow: 1;
+        }
+        #typing {
+            display: inline;
+        }
+
+        /* Box Style */
+        .boxes {
+            margin: 20px;
+        }
+
+        .box {       
+            background-color: rgba(0, 0, 255, 0.2); /* Background default (biru transparan) */
+            backdrop-filter: blur(10px); /* Efek blur */
+            border-radius: 9px; /* Sudut melengkung */
+            padding: 20px;
+            margin-bottom: 20px; /* Jarak antar box */
+            color: white; /* Warna teks */
+            text-align: left; /* Teks rata kiri */
+            overflow: auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow */
+            justify-content: space-between;
+        }
+
+        .box2 {       
+            background-color: rgba(128, 128, 128, 0.3); /* Background default (biru transparan) */
+            backdrop-filter: blur(10px); /* Efek blur */
+            border-radius: 8px; /* Sudut melengkung */
+            padding: 20px;
+            margin-bottom: 20px; /* Jarak antar box */
+            color: white; /* Warna teks */
+            text-align: left; /* Teks rata kiri */
+            overflow: auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow */
+            justify-content: space-between;
+        }
+        .box4 {       
+            background-color: #2D4E63; /* Background default (biru transparan) */
+            backdrop-filter: blur(10px); /* Efek blur */
+            border-radius: 8px; /* Sudut melengkung */
+            padding: 20px;
+            width: 120px;
+            height: 70px;
+            margin-bottom: 20px; /* Jarak antar box */
+            color: white; /* Warna teks */
+            text-align: left; /* Teks rata kiri */
+            item-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow */
+            justify-content: space-between;
+        }
+        .button-orange {
+    background-color: orange; 
+    color: white; 
+    padding: 5px 10px; 
+    margin: 20px;
+    border-radius: 51px; 
+    font-size: 16px; 
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    text-align: center; 
+    cursor: pointer; 
+}
+
+        .box p {
+            margin: 0; /* Menghapus margin default teks */
+        }
+        .box .notifications-icon {
+            font-size: 30px;
+             margin-right: 50px; 
+             color: black;          
+        }
+        #money {
+            font-size: 26px;
+        }
+        .mo {
+            text-align: center;
+        }
+
+        .eye-icon {
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .eye-icon i {
+            font-size: 24px;
+        }
+
+        /* Styling untuk saldo dan teks */
+        #saldo-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        #saldo-container img {
+            width: 50px; /* Membuat gambar sedikit lebih besar */
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        #saldo-container span {
+            display: block;
+            font-size: 18px;
+            margin-left: 10px;
+        }
+        .box-c {
+      display: flex; /* Menjadikan container menggunakan Flexbox */
+      margin: 20px;
+      justify-content: space-between; /* Memberikan jarak antara box */
+      gap: 20px; /* Memberikan jarak antar box */
+    }
+
+    .box1 {
+      width: 180px; /* Lebar box */
+      height: 50px; /* Tinggi box */
+      background-color: #4CAF50; /* Warna latar box */
+      color: white; /* Warna teks di dalam box */
+      display: flex;
+      justify-content: center;
+      align-items: center; /* Menyusun teks di tengah box */
+      border-radius: 20px; /* Membulatkan sudut box */
+    }
+    .title {
+            font-weight: 700;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+        .saldo-section {
+            
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+            padding: 10px;
+            background: #f5f5f5;
+            border-radius: 8px;
+        }
+        .saldo {
+            font-size: 1.4em;
+            font-weight: 500;
+        }
+        .icon {
+            cursor: pointer;
+            font-size: 1.2em;
+            color: #ffffff;
+        }
+        .account-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding: 10px;
+            background: #f5f5f5;
+            border-radius: 8px;
+        }
+        .account-number {
+            font-size: 20px;
+            margin-right: 20px;
+            color: #ffffff;
+        }
+        .copy-toast {
+            display: none;
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #333;
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+        }
+        .copy-toast.show {
+            display: block;
+            animation: fadeout 2s forwards;
+        }
+        @keyframes fadeout {
+            0% {
+                opacity: 1;
+            }
+            80% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+        .divider {
+    width: 100%; /* Sesuaikan panjang garis */
+    height: 1px; /* Ketebalan garis */
+    background-color: #dcdcdc; /* Warna garis */
+    margin: 10px 0; /* Jarak atas-bawah garis */
+}
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #7f7f7f;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  z-index: 1000;
+}
+.bottom-nav img {
+  position: absolute;
+  height: 80px;
+  margin-right: 20px;
+  margin-top: 30px;
+  width: 80px;
+  bottom: 80%; /* Atur overlay ke atas */
+  left: 50%;
+  transform: translate(-50%, 50%); /* Pusatkan dan naikkan */
+  border-radius: 50%; /* Bentuk bulat */
+  padding: 15px; /* Sesuaikan ukuran */
+  z-index: 10; /* Pastikan di atas elemen lain */
+}
+
+
+.bottom-nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 15px;
+  margin: 0 10px;
+  text-align: center;
+  padding: 5px;
+}
+
+.bottom-nav a:hover {
+  color: #ffcc00; /* Warna highlight saat hover */
+}
+
+.bottom-nav a:active {
+  color: #00ff00; /* Warna saat diklik */
+}
+    </style>
+</head>
+<body>
+    <!-- Semua HTML lama tetap di sini -->
+ <div class="header">
+        <a href="profile.html" class="profile-link">
+            <span class="material-icons profile-icon">account_circle</span>
+        </a>
+       <div class="mo">
+        <h1>
+            
+            <span style="color: yellow;">D</span><span style="color: white;">ann Pay</span>
+        </h1>
+    </div>
+        <a href="mail.html" class="mail-link">
+            <span class="material-icons mail-icon">mail</span>
+        </a>
+    </div>
+
+    <!-- Boxes -->
+    
+   <div class="boxes">
+        
+        <div class="box">
+            <span style="margin-right: 14px;">Saldo Rekening</span>            
+            <i class="fa-solid fa-eye icon" id="toggleSaldo"></i>
+            <br><br>
+            <span class="saldo" id="saldo">Rp 0</span>
+        <div class="divider"></div>
+        <br>
+            <span class="account-number" id="accountNumber">Nomor Rekening</span>
+            <i class="fa-solid fa-copy icon" id="copyIcon" title="Copy"></i>
+        </div>
+        <div class="copy-toast" id="copyToast">Tersalin ke clipboard!</div>
+    </div>
+
+        <!-- Box Kedua -->
+        <div class="button-orange">
+            </p>Isi Saldo Sekarang!! </p>
+        </div>
+        
+        <!-- mg src="./sw/1.jpg" alt="icon" style="width: 315px; height: auto; margin: 20px;" -->
+        <br>
+        <span style="font-size: 25px; color: white; margin: 20px;">Tagihan</span>
+        <div class="boxes">
+           <div class="box2">
+               <img src="./icon/2.png" alt="icon" style="width: 50px; height: 50px;  margin-right: 21px;">
+               <img src="./icon/3.png" alt="icon" style="width: 50px; height: 50px;  margin-right: 21px;">
+               <img src="./icon/4.png" alt="icon" style="width: 50px; height: 50px;  margin-right: 21px;">
+               <img src="./icon/5.png" alt="icon" style="width: 50px; height: 50px;  ">
+               <br>               
+               <span style="margin-right: 32px">Top-Up</span><span style="margin-right: 36px">Pulsa</span><span style="margin-right: 39px">Data</span><span>Kirim</span>
+               <br><br>
+               <br>
+               <img src="./icon/6.png" alt="icon" style="width: 50px; height: 50px;  margin-right: 21px;">
+               <img src="./icon/7.png" alt="icon" style="width: 50px; height: 50px;  margin-right: 21px;">
+               <img src="./icon/8.png" alt="icon" style="width: 50px; height: 50px;  margin-right: 21px;">
+               <br>
+               <span style="margin-right: 19px">E-Wallet</span><span style="margin-right: 28px">Games</span><span>Other</span>
+           </div>
+        </div>
+        <br><br>
+        <span style="font-size: 25px; color: white; margin: 20px;">Bayar Sekarang!</span>
+         <div class="box-c">
+             <div class="box1">Bayar Qris</div>
+             <div class="box1">Transfer Bank</div> 
+             </div>
+             <br><br>
+             <span style="font-size: 25px; color: white; margin: 20px;">Kelola Keuangan</span>
+             <div class="box-c">
+   <div class="box4">
+       <img src="./sw/2.png" alt="icon" style="width: 50px; height: 50px; margin-left: 20px">
+       <span style="color: white; margin: 13px; font-size: 18px;">Investasi</span>
+   </div>
+   <div class="box4">
+       <img src="./sw/3.png" alt="icon" style="width: 50px; height: 50px; margin-left: 30px">
+       <span style="color: white; margin: 13px; font-size: 19px;">Patungan</span>
+   </div>
+   </div>
+   <div class="box-c">
+   <div class="box4">
+       <img src="./sw/4.png" alt="icon" style="width: 50px; height: 50px; margin-left: 24px">
+       <span style="color: white; margin: 16px; font-size: 19px;">Nabung</span>
+   </div>
+   <div class="box4">
+       <img src="./icon/8.png" alt="icon" style="width: 50px; height: 50px; margin-left: 27px">
+       <span style="color: white; margin: 21px; font-size: 19px;">Lainnya</span>
+   </div>
+</div>
+<br><br>
+<span style="font-size: 25px; color: white; margin: 20px;">Promo Menarik!</span>
+          <nav class="bottom-nav">
+  <a href="#home">
+    <i class="fas fa-home"></i><br>Home
+  </a>
+  <a href="#history">
+    <i class="fas fa-clock"></i><br>Riwayat
+  </a> 
+  <a href="#history">
+    <i class="fas fa-clock"></i><br>T
+  </a> 
+  <img src="3.png" alt="">
+  <a href="#settings">
+    <i class="fas fa-cog"></i><br>Setelan
+  </a>
+  <a href="#logout">
+    <i class="fas fa-sign-out-alt"></i><br>Logout
+  </a>
+</nav>
+    <script type="module">
+        // Firebase
+        import { getApps, initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+        import { getDatabase, ref, set, get, remove, update } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
+
+        let db;
+        try {
+            const apps = getApps();
+            if (apps.length) {
+                db = getDatabase();
+            } else {
+                const firebaseConfig = {
+                    apiKey: "AIzaSyAuZVc1lAqJQY2pStcfKK0MrXoPiAp-o4Y",
+                    authDomain: "dann-871ca.firebaseapp.com",
+                    databaseURL: "https://dann-871ca-default-rtdb.firebaseio.com",
+                    projectId: "dann-871ca",
+                    storageBucket: "dann-871ca.appspot.com",
+                    messagingSenderId: "266247753707",
+                    appId: "1:266247753707:web:dbe66fd00ae679a40013ae",
+                    measurementId: "G-1C45Y0TKPJ"
+                };
+                const app = initializeApp(firebaseConfig);
+                db = getDatabase(app);
+            }
+        } catch (e) {
+            console.error("Firebase initialization error:", e);
+        }
+
+        // Fungsi untuk membaca cookie
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+        }
+
+        // Fungsi untuk menyimpan cookie
+        function setCookie(name, value, days) {
+            const date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            document.cookie = `${name}=${value}; expires=${date.toUTCString()}; path=/`;
+        }
+
+        // Fungsi untuk memeriksa login
+        function checkLogin() {
+            const nomer = getCookie('nomer');
+            if (!nomer) {
+                window.location.href = "/signup"; // Redirect jika belum login
+            } else {
+                fetchUserData(nomer);
+            }
+        }
+
+        // Fungsi untuk mengambil data user dari Firebase
+        async function fetchUserData(nomer) {
+            const userRef = ref(db, `users/${nomer}`);
+            try {
+                const snapshot = await get(userRef);
+                if (snapshot.exists()) {
+                    const data = snapshot.val();
+                    updateUI(data);
+                } else {
+                    console.error(`User dengan ID ${nomer} tidak ditemukan.`);
+                }
+            } catch (error) {
+                console.error("Error fetching user data:", error);
+            }
+        }
+
+        // Fungsi untuk logout
+        function logout() {
+            document.cookie = "nomer=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            window.location.href = "/login"; // Redirect ke halaman login
+        }
+
+        // Fungsi untuk update UI
+        function updateUI(data) {
+            const saldo = document.getElementById("saldo");
+            const accountNumber = document.getElementById("accountNumber");
+            saldo.innerText = `Rp ${data.saldo.toLocaleString("id-ID")}`;
+            accountNumber.innerText = data.rek;
+
+            // Update nama di header
+            const headerTitle = document.querySelector('.mo h1 span:last-child');
+            if (headerTitle) {
+                headerTitle.innerText = data.nama;
+            }
+        }
+
+        // Menjalankan fungsi login saat halaman dimuat
+        checkLogin();
+
+        // Event Listener untuk logout (buat tombol logout jika perlu)
+        const logoutButton = document.getElementById("logoutButton");
+        if (logoutButton) {
+            logoutButton.addEventListener("click", logout);
+        }
+
+        // Event Listener lain tetap seperti di kode asli
+        const toggleSaldo = document.getElementById("toggleSaldo");
+        toggleSaldo.addEventListener("click", () => {
+            const saldo = document.getElementById("saldo");
+            const isHidden = saldo.innerText === "Rp ••••••";
+            if (isHidden) {
+                saldo.innerText = `Rp ${result.saldo.toLocaleString("id-ID")}`;
+                toggleSaldo.classList.remove("fa-eye");
+                toggleSaldo.classList.add("fa-eye-slash");
+            } else {
+                saldo.innerText = "Rp ••••••";
+                toggleSaldo.classList.remove("fa-eye-slash");
+                toggleSaldo.classList.add("fa-eye");
+            }
+        });
+    </script>
+</body>
+</html>
