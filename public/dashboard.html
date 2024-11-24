@@ -494,6 +494,19 @@
                 toggleSaldo.classList.add("fa-eye");
             }
         });
+        document.getElementById("copyIcon").addEventListener("click", function() {
+    const accountNumber = document.getElementById("accountNumber").innerText;
+
+    // Menyalin teks ke clipboard
+    navigator.clipboard.writeText(accountNumber).then(() => {
+        // Menampilkan notifikasi "Tersalin ke clipboard!"
+        const copyToast = document.getElementById("copyToast");
+        copyToast.classList.add("show");
+        setTimeout(() => copyToast.classList.remove("show"), 2000);
+    }).catch(err => {
+        console.error("Gagal menyalin teks:", err);
+    });
+});
     </script>
 </body>
 </html>
