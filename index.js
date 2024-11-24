@@ -19,7 +19,7 @@ const {
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
+//app.use(cookieParser());
 
 // Middleware untuk menyajikan file statis
 app.use(express.static(path.join(__dirname, "public")));
@@ -94,16 +94,6 @@ app.post("/api/adduser", async (req, res) => {
   }
 });
 
-app.post("/api/login", (req, res) => {
-  const { token } = req.body;
-  res.cookie("token", token, { httpOnly: true });
-  res.json({ message: "Login berhasil" });
-});
-
-app.post("/api/out", (req, res) => {
-  res.clearCookie("token");
-  res.json({ message: "Logout berhasil" });
-});
 
 app.get("/api/viewall", async (req, res) => {
   try {
