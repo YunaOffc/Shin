@@ -25,17 +25,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 // Middleware untuk Auth
-function checkAuth(req, res, next) {
-  const token = req.cookies.token;
-  if (!token) {
-    return res.redirect("/signup");
-  }
-  next();
-}
 
 // Routes
 app.get("/", (req, res) => {
-  res.redirect("/signup");
+  res.redirect("/dashboard");
 });
 
 app.get("/signup", (req, res) => {
